@@ -46,9 +46,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+
     public ArticleDAOImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
+
+
 
     public List<Article> getAllArticles() {
         List<Article> articles =

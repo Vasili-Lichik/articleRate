@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
+
 public class AuthorDAOImpl implements AuthorDAO {
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -21,33 +23,41 @@ public class AuthorDAOImpl implements AuthorDAO {
     public AuthorDAOImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
-
+    /**
+     * SQL request for get all authors
+     */
     @Value("${author.select}")
     private String select;
-
+    /**
+     * SQL request for insert author
+     */
     @Value("${author.insert}")
     private String insert;
-
+    /**
+     * SQL request for select author by ID
+     */
     @Value("${author.selectById}")
     private String selectById;
-
+    /**
+     * SQL request for update author
+     */
     @Value("${author.update}")
     private String updateSql;
-
+    /**
+     * SQL request for delete author
+     */
     @Value("${author.delete}")
     private String deleteSql;
 
-
-
     @Override
-    public List<Author> getAllAuthor() {
+    public final List<Author> getAllAuthor() {
         List<Author> list =
                 namedParameterJdbcTemplate.getJdbcOperations().query(select, new AuthorRowMapper());
         return list;
     }
 
     @Override
-    public Author getAuthorById(Integer authorId) {
+    public final Author getAuthorById(Integer authorId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource("authorId", authorId);
         Author author = namedParameterJdbcTemplate.queryForObject(selectById, namedParameters,
                 BeanPropertyRowMapper.newInstance(Author.class));
@@ -55,7 +65,7 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public Author addAuthor(Author author) {
+    public final Author addAuthor(Author author) {
         SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(author);
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insert, namedParameters, generatedKeyHolder);
@@ -64,13 +74,13 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public void updateAuthor(Author author) {
+    public final void updateAuthor(Author author) {
         SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(author);
         namedParameterJdbcTemplate.update(updateSql, namedParameter);
     }
 
     @Override
-    public void deleteAuthorById(Integer authorId) {
+    public final void deleteAuthorById(Integer authorId) {
         namedParameterJdbcTemplate.getJdbcOperations().update(deleteSql, authorId);
     }
 
@@ -84,6 +94,4 @@ public class AuthorDAOImpl implements AuthorDAO {
             return author;
         }
     }
-
-
 }

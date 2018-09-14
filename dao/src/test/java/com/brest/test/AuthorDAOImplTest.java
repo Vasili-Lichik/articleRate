@@ -8,21 +8,17 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 
-@ContextConfiguration(locations = { "classpath:test-db-spring.xml",
+@ContextConfiguration(locations = {
+        "classpath:test-db-spring.xml",
         "classpath:test-dao.xml",
         "classpath:dao.xml"})
 @Rollback
 @Transactional
 public class AuthorDAOImplTest {
-
-
     @Autowired
     AuthorDAO authorDAO;
 
