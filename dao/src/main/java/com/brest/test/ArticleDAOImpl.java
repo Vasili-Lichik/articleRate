@@ -1,8 +1,15 @@
 package com.brest.test;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +21,28 @@ public class ArticleDAOImpl implements ArticleDAO {
      */
     @Value("${article.select}")
     private String select;
+    /**
+     * SQL request for get article by ID
+     */
+    @Value("${article.selectById}")
+    private String selectById;
+    /**
+     * SQL request for insert article
+     */
+    @Value("${article.insert}")
+    private String insert;
 
+    /**
+     * SQL request for update article
+     */
+    @Value("${article.update}")
+    private String updateSql;
+
+    /**
+     * SQL request for delete article
+     */
+    @Value("${article.delete}")
+    private String deleteSql;
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -29,19 +57,27 @@ public class ArticleDAOImpl implements ArticleDAO {
     }
 
     public Article getArticleById(Integer articleId) {
-        return null;
+        SqlParameterSource namedParameters = new MapSqlParameterSource("articleId", articleId);
+        Article article = namedParameterJdbcTemplate.queryForObject(selectById, namedParameters,
+                BeanPropertyRowMapper.newInstance(Article.class));
+        return article;
     }
 
     public Article addArticle(Article article) {
-        return null;
+        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(article);
+        KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(insert, namedParameters, generatedKeyHolder);
+        article.setArticleId(generatedKeyHolder.getKey().intValue());
+        return article;
     }
 
     public void updateArticle(Article article) {
-
+        SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(article);
+        namedParameterJdbcTemplate.update(updateSql,namedParameter);
     }
 
     public void deleteArticleById(Integer articleId) {
-
+        namedParameterJdbcTemplate.getJdbcOperations().update(deleteSql, articleId);
     }
 
     private class ArticlesRowMapper implements RowMapper<Article> {

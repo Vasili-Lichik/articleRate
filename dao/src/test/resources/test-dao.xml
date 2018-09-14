@@ -13,4 +13,8 @@
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
+    <bean id="authorDAO" class="com.brest.test.AuthorDAOImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate" />
+    </bean>
+
 </beans>
