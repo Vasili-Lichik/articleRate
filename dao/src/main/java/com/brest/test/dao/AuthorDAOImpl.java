@@ -1,5 +1,6 @@
-package com.brest.test;
+package com.brest.test.dao;
 
+import com.brest.test.Author;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;

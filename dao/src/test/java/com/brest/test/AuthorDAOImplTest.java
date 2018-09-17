@@ -1,5 +1,6 @@
 package com.brest.test;
 
+import com.brest.test.dao.AuthorDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,7 @@
-package com.brest.test;
+package com.brest.test.service;
+
+import com.brest.test.Article;
+import com.brest.test.dao.ArticleDAO;
 
 import java.util.List;
 

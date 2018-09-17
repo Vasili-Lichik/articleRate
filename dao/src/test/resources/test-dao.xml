@@ -9,11 +9,11 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="articleDao" class="com.brest.test.ArticleDAOImpl">
+    <bean id="articleDao" class="com.brest.test.dao.ArticleDAOImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="authorDAO" class="com.brest.test.AuthorDAOImpl">
+    <bean id="authorDAO" class="com.brest.test.dao.AuthorDAOImpl">
         <constructor-arg ref="namedParameterJdbcTemplate" />
     </bean>
 

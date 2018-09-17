@@ -1,6 +1,7 @@
-package com.brest.test;
+package com.brest.test.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.brest.test.Author;
+import com.brest.test.dao.AuthorDAO;
 
 import java.util.List;
 

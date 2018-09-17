@@ -1,4 +1,6 @@
-package com.brest.test;
+package com.brest.test.service;
+
+import com.brest.test.Article;
 
 import java.util.List;
 

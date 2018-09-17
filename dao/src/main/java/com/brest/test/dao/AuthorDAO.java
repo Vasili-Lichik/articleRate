@@ -1,4 +1,6 @@
-package com.brest.test;
+package com.brest.test.dao;
+
+import com.brest.test.Author;
 
 import java.util.List;
 
