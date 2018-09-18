@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit article</title>
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+</head>
+
+<body>
+<!--верхняя минюшка-->
+<nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand"><img src="../../resources/static/img/logo.svg"
+                                          th:src="@{/resources/static/img/logo.svg}"
+                                          height="32" width="64"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <a class="nav-item nav-link active"
+               th:href="@{/authors}">Authors</a>
+            <a class="nav-item nav-link"
+               th:href="@{/articles}">Articles</a>
+        </ul>
+    </div>
+</nav>
+
+<section id="article">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <form id="articleForm"
+                          th:object="${article}"
+                          action="article.html"
+                          th:action="@{${#httpServletRequest.servletPath}}"
+                          th:method="@{post}">
+                        <!--скрытое поле article ID для добавления article-->
+                        <input id="field_callID"
+                               name=""
+                               type="hidden"
+                               th:field="*{articleId}"/>
+                        <!--Поле для article name-->
+                        <div class="form-group">
+                            <label class="d-none d-sm-inline"
+                                   for="field_name">Article Name</label>
+                            <input type="text"
+                                   class="form-control col-lg-2"
+                                   id="field_name"
+                                   name="name"
+                                   th:field="*{articleName}">
+                        </div>
+                        <!--Поле для article Rate-->
+                        <div class="form-group">
+                            <label class="d-none d-sm-inline"
+                                   for="field_rate">Article Rate</label>
+                            <input type="text"
+                                   class="form-control col-lg-2"
+                                   id="field_rate"
+                                   th:field="*{articleRate}">
+                        </div>
+                        <div class="form-group">
+                            <label class="d-none d-sm-inline">Article author</label>
+                            <div>
+                                <select th:field="*{articleAuthorId}">
+                                    <option th:each="author : ${authors}"
+                                            th:value="${author.authorId}"
+                                            th:text="${author.authorName}">Wireframe
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+</body>
+</html>

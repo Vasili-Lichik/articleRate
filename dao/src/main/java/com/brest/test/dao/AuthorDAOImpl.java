@@ -1,6 +1,7 @@
 package com.brest.test.dao;
 
 import com.brest.test.Author;
+import com.brest.test.AuthorDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -50,6 +51,10 @@ public class AuthorDAOImpl implements AuthorDAO {
     @Value("${author.delete}")
     private String deleteSql;
 
+    @Value("${author.selectDto}")
+    private String selectDto;
+
+
     @Override
     public final List<Author> getAllAuthor() {
         List<Author> list =
@@ -85,6 +90,16 @@ public class AuthorDAOImpl implements AuthorDAO {
         namedParameterJdbcTemplate.getJdbcOperations().update(deleteSql, authorId);
     }
 
+
+    @Override
+    public List<AuthorDto> getAllAuthorDto() {
+        List<AuthorDto> list =
+                namedParameterJdbcTemplate.getJdbcOperations().query(selectDto, new AuthorDtoRowMapper());
+        return list;
+    }
+
+
+
     private class AuthorRowMapper implements RowMapper<Author> {
         @Override
         public Author mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -95,4 +110,17 @@ public class AuthorDAOImpl implements AuthorDAO {
             return author;
         }
     }
+
+    private class AuthorDtoRowMapper implements RowMapper<AuthorDto> {
+        @Override
+        public AuthorDto mapRow(ResultSet resultSet, int i) throws SQLException {
+            AuthorDto authorDto = new AuthorDto();
+            authorDto.setAuthorId(resultSet.getInt("authorId"));
+            authorDto.setAuthorName(resultSet.getString("authorName"));
+            authorDto.setAuthorEmail(resultSet.getString("authorEmail"));
+            authorDto.setAvgArticleRate(resultSet.getFloat("avgArticleRate"));
+            return authorDto;
+        }
+    }
+
 }

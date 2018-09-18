@@ -33,6 +33,7 @@ public class ArticleDAOImplTest {
     public void getAllArticles() {
         List<Article> list = articleDAO.getAllArticles();
         Assert.assertFalse(list.isEmpty());
+        Assert.assertTrue(list.size()==3);
     }
 
     @Test
@@ -45,7 +46,6 @@ public class ArticleDAOImplTest {
         Assert.assertTrue(newArticle.getArticleName().equals(article.getArticleName()));
         Assert.assertTrue(newArticle.getArticleRate().equals(article.getArticleRate()));
         Assert.assertTrue((sizeBefore + 1) == articleDAO.getAllArticles().size());
-
     }
 
     @Test
@@ -85,5 +85,12 @@ public class ArticleDAOImplTest {
         articleDAO.deleteArticleById(article.getArticleId());
         int sizeAfter = articleDAO.getAllArticles().size();
         Assert.assertTrue(sizeBefore==sizeAfter+1);
+    }
+
+    @Test
+    public void getAllArticleDto(){
+        List<ArticleDto> articleDtos= articleDAO.getAllArticleDto();
+        Assert.assertFalse(articleDtos.isEmpty());
+        Assert.assertTrue(articleDtos.size()==3);
     }
 }

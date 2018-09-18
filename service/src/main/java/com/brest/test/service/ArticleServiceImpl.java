@@ -1,6 +1,7 @@
 package com.brest.test.service;
 
 import com.brest.test.Article;
+import com.brest.test.ArticleDto;
 import com.brest.test.dao.ArticleDAO;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public class ArticleServiceImpl implements ArticleService{
 
     public void deleteArticleById(Integer articleId) {
         articleDAO.deleteArticleById(articleId);
+    }
+
+    public  List<ArticleDto> getAllArticleDto(){
+        return articleDAO.getAllArticleDto();
     }
 }

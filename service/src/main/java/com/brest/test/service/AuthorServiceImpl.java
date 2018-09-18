@@ -1,6 +1,7 @@
 package com.brest.test.service;
 
 import com.brest.test.Author;
+import com.brest.test.AuthorDto;
 import com.brest.test.dao.AuthorDAO;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public class AuthorServiceImpl implements AuthorService {
 
     public void deleteAuthorById(Integer authorId) {
         authorDAO.deleteAuthorById(authorId);
+    }
+
+    public List<AuthorDto> getAuthorDto() {
+        return authorDAO.getAllAuthorDto();
     }
 }

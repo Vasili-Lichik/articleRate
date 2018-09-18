@@ -49,6 +49,11 @@
                 <artifactId>web-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.brest.test</groupId>
+                <artifactId>test-db</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 <!--springframework-->
             <dependency>
@@ -88,14 +93,15 @@
             </dependency>
 
 <!--H2-->
+            <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.196</version>
-                <scope>test</scope>
             </dependency>
 
-<!--test-->
+
+            <!--test-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit article</title>
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+
+<body>
+<nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand"><img src="../../resources/static/img/logo.svg"
+                                          th:src="@{/resources/static/img/logo.svg}"
+                                          height="32" width="64"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <a class="nav-item nav-link active"
+               href="departments.html"
+               th:href="@{/authors}">Authors</a>
+            <a class="nav-item nav-link"
+               href="employees.html"
+               th:href="@{/articles}">Articles</a>
+        </ul>
+    </div>
+</nav>
+
+<section id="author">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <form id="authorForm" role="form"
+                          th:object="${author}"
+                          action="author.html"
+                          th:action="@{${#httpServletRequest.servletPath}}"
+                          th:method="@{post}">
+                        <!--скрытое поле article ID для добавления article-->
+                        <input id="field_authorID"
+                               name=""
+                               type="hidden"
+                               th:field="*{authorId}"/>
+
+                        <!--Поле для author name-->
+                        <div class="form-group">
+                            <label class="d-none d-sm-inline"
+                                   for="field_name">author Name</label>
+                            <input type="text"
+                                   class="form-control col-lg-2"
+                                   id="field_name"
+                                   name="name"
+                                   th:field="*{authorName}">
+                        </div>
+
+                        <!--Поле для article Rate-->
+                        <div class="form-group">
+                            <label class="d-none d-sm-inline"
+                                   for="field_email">Author E-mail</label>
+                            <input type="text"
+                                   class="form-control col-lg-2"
+                                   id="field_email"
+                                   th:field="*{authorEmail}">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

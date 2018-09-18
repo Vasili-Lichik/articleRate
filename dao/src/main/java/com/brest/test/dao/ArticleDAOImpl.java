@@ -1,6 +1,7 @@
 package com.brest.test.dao;
 
 import com.brest.test.Article;
+import com.brest.test.ArticleDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -45,14 +46,15 @@ public class ArticleDAOImpl implements ArticleDAO {
     @Value("${article.delete}")
     private String deleteSql;
 
+    @Value("${article.selectDto}")
+    private String selectDto;
+
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
     public ArticleDAOImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
-
-
 
     public List<Article> getAllArticles() {
         List<Article> articles =
@@ -84,6 +86,12 @@ public class ArticleDAOImpl implements ArticleDAO {
         namedParameterJdbcTemplate.getJdbcOperations().update(deleteSql, articleId);
     }
 
+    public  List<ArticleDto> getAllArticleDto(){
+        List<ArticleDto> articlesDto =
+                namedParameterJdbcTemplate.getJdbcOperations().query(selectDto, new ArticlesDtoRowMapper());
+        return articlesDto;
+    }
+
     private class ArticlesRowMapper implements RowMapper<Article> {
         @Override
         public Article mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -93,6 +101,18 @@ public class ArticleDAOImpl implements ArticleDAO {
             article.setArticleRate(resultSet.getInt("articleRate"));
             article.setArticleId(resultSet.getInt("articleAuthorId"));
             return article;
+        }
+    }
+
+    private class ArticlesDtoRowMapper implements RowMapper<ArticleDto>{
+        @Override
+        public ArticleDto mapRow(ResultSet resultSet, int i) throws SQLException {
+            ArticleDto articleDto = new ArticleDto();
+            articleDto.setArticleId(resultSet.getInt("articleId"));
+            articleDto.setArticleName(resultSet.getString("articleName"));
+            articleDto.setArticleRate(resultSet.getInt("articleRate"));
+            articleDto.setArticleAuthorName(resultSet.getString("articleAuthorName"));
+            return articleDto;
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.brest.test.dao;
 
 import com.brest.test.Author;
+import com.brest.test.AuthorDto;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface AuthorDAO  {
     Author addAuthor (Author author);
     void updateAuthor(Author author);
     void deleteAuthorById (Integer authorId);
+    List<AuthorDto> getAllAuthorDto();
 }
