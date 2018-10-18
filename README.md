@@ -1,9 +1,10 @@
 # articleRate
 
-Building
+Building 
 To build this project you will need Maven. You can get it at:
 
  http://maven.apache.org
+ 
 Install:
 
  mvn clean instal
